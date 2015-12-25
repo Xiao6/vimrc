@@ -1,50 +1,52 @@
-" liuzxiao's vimrc
+" my vimrc
 " GITHUB:https://github.com/Xiao6/vimrc.git 
 
-
-" athogen.vim: auto load plugins in .vim/bundle
-let g:pathogen_disabled = []
-" disable powerline pluginin when running vim in terminal
-if !has('gui_running')
-   call add(g:pathogen_disabled, 'powerline')
+" Vundle
+set nocompatible              " be iMproved, required
+filetype off                  " required
+if has ('unix')
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  elseif has ('win_32')
+    set rtp+=$HOME/vimfiles/bundle/Vundle.vim/
+    call vundle#begin('$HOME/vimfiles/bundle/')
 endif
 
-call pathogen#incubate()
-call pathogen#helptags()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" general settings
-set number              " show line number
-set hlsearch		" search highlighting
-syntax on               " syntax highlighting
-set laststatus=2        " Always show the statusline
-set nobackup		" no *~ backup files
-set noswapfile
-set ignorecase		" ignore case when searching
-set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
-set smarttab		" insert tabs on the start of a line according to context
-set expandtab		" tabs mutate into spaces
-set hlsearch            " highlight search terms
-set incsearch           " incremental search
-set hidden              " hides buffers instead of closing them
-set nowrap              " don't wrap lines
-set tabstop=4           " a tab is four spaces
-set backspace=indent,eol,start
-                        " allow backspacing over everything in insert mode
-set autoindent          " always set autoindenting on
-set copyindent          " copy the previous indentation on autoindenting
+" Dstraction-free writing in Vim.  - https://github.com/junegunn/goyo.vim
+Plugin 'junegunn/goyo.vim'
+" This is a Vim extension that emulates iA Writer environment - https://github.com/amix/vimrc/tree/master/sources_non_forked/vim-zenroom2
+Plugin 'amix/vim-zenroom2'
+" Display buffer instead of tabs  - https://github.com/ap/vim-buftabline
+Plugin 'bling/vim-bufferline'
 
-set history=1000         " remember more commands and search history
-set undolevels=1000      " use many muchos levels of undo
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep
-
-
+call vundle#end()
 filetype plugin indent on
-if has('autocmd')
-        autocmd filetype python set expandtab
-endif
+""""""""""""""""""""""""""""""""""""
+
+syntax on                   "syntax highlighting
+set number                  "show line mumber
+set incsearch               "incremental search
+set hlsearch                "highlight search
+set nobackup                "get rid of anoying ~file
+set noswapfile
+if has ('gui_running')
+  set cursorline "hightline current line
+endif  
+set ignorecase              "ignore case when searching
+set smartcase               "ignore case if search pattern is all lowercase,case-sensitive otherwise
+set backspace=indent,eol,start 
+                            "set backspace to delete auto autoindentation, and end of line and over start of insertion
+
+" Indentation settings for using 4 spaces instead of tabs.
+" Do not change 'tabstop' from its default value of 8 with this setup.
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+
 
 " Load custom settings
 source ~/.vim/startup/color.vim
@@ -78,9 +80,6 @@ endfunction
 let mapleader=","
 let g:mapleader=","
 
-" clear search highlighting with <leader>/
-nmap <silent> <leader>/ :nohlsearch<CR>
-
 " Quickly edit/reload the vimrc file
 " http://nvie.com/posts/how-i-boosted-my-vim/
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -91,15 +90,24 @@ map pre :w\|!open %<cr>
 
 set pastetoggle=<F2>
 
-" Easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-"************************
-" function
-"************************
+" Goyo settings 
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
 
-" NERDTree
-map <C-n> :NERDTreeToggle<CR> " shortcut binding
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif   " close if NERDTree is the last window
+" set *.md to use markdown syntax
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" markdown preview
+if has('gui_win32') 
+  autocmd BufEnter *.md silent! exe 'noremap <F5> :!start C:\Program Files (x86)\Google\Chrome\Application\chrome.exe %:p<CR>'
+endif
+
+" Load custom settings
+if has ('win32')
+  source $VIM/vimfiles/startup/color.vim
+endif
+if has ('unix')
+  source ~/.vim/startup/color.vim
+endif
