@@ -7,20 +7,7 @@ GitHub: https://github.com/Xiao6/vimrc.git
 2. create symlinks:
     * ln -s ~/.vim/vimrc ~/.vimrc
     * ln -s ~/.vim/gvimrc ~/.gvimrc
-3. fetch submodules
-    * cd ~/.vim
-    * git submodule init
-    * git submodule update
-
-
-## Shortcuts
-* C+n: NERDTREE
-
-## Plugins
-* [Pathogen](https://github.com/tpope/vim-pathogen): manage all plugins under .vim/bundle
-* [NERDTREE](https://github.com/scrooloose/nerdtree): file explorer
-* [Powerline](https://github.com/Lokaltog/powerline): powerful status line (gui only)
-* [Gitgutter](https://github.com/airblade/vim-gitgutter): git line level diff
+3. install plugins :PluginInstal 
 
 ## Quick Guide
 http://www.worldtimzone.com/res/vi.html
