@@ -14,4 +14,3 @@ http://www.worldtimzone.com/res/vi.html
 
 ## Reference
 * [How I boosted my Vim](http://nvie.com/posts/how-i-boosted-my-vim/)
-* 
