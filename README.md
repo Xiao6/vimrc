@@ -7,7 +7,8 @@ GitHub: https://github.com/Xiao6/vimrc.git
 2. create symlinks:
     * ln -s ~/.vim/vimrc ~/.vimrc
     * ln -s ~/.vim/gvimrc ~/.gvimrc
-3. install plugins :PluginInstal 
+3. Install vundle: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim    
+3. install plugins :PluginInstall
 
 ## Quick Guide
 http://www.worldtimzone.com/res/vi.html
